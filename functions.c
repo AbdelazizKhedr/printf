@@ -1,39 +1,5 @@
 #include "main.h"
 
-/************************* WRITE NUMBER *************************/
-/**
- * write_number - Prints a string
- * @is_negative: Lista of arguments
- * @ind: char types.
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width.
- * @precision: precision specifier
- * @size: Size specifier
- *
- * Return: Number of chars printed.
- */
-int write_number(int is_negative, int ind, char buffer[],
-	int flags, int width, int precision, int size)
-{
-	int length = BUFF_SIZE - ind - 1;
-	char padd = ' ', extra_ch = 0;
-
-	UNUSED(size);
-
-	if ((flags & F_ZERO) && !(flags & F_MINUS))
-		padd = '0';
-	if (is_negative)
-		extra_ch = '-';
-	else if (flags & F_PLUS)
-		extra_ch = '+';
-	else if (flags & F_SPACE)
-		extra_ch = ' ';
-
-	return (write_num(ind, buffer, flags, width, precision,
-		length, padd, extra_ch));
-}
-
 /**
  * write_num - Write a number using a bufffer
  * @ind: Index at which the number starts on the buffer
@@ -137,6 +103,39 @@ int handle_write_char(char c, char buffer[],
 	return (write(1, &buffer[0], 1));
 }
 
+/************************* WRITE NUMBER *************************/
+/**
+ * write_number - Prints a string
+ * @is_negative: Lista of arguments
+ * @ind: char types.
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: precision specifier
+ * @size: Size specifier
+ *
+ * Return: Number of chars printed.
+ */
+int write_number(int is_negative, int ind, char buffer[],
+	int flags, int width, int precision, int size)
+{
+	int length = BUFF_SIZE - ind - 1;
+	char padd = ' ', extra_ch = 0;
+
+	UNUSED(size);
+
+	if ((flags & F_ZERO) && !(flags & F_MINUS))
+		padd = '0';
+	if (is_negative)
+		extra_ch = '-';
+	else if (flags & F_PLUS)
+		extra_ch = '+';
+	else if (flags & F_SPACE)
+		extra_ch = ' ';
+
+	return (write_num(ind, buffer, flags, width, precision,
+		length, padd, extra_ch));
+}
 
 /************************* PRINT CHAR *************************/
 
@@ -148,10 +147,8 @@ int handle_write_char(char c, char buffer[],
  * @width: Width
  * @precision: Precision specification
  * @size: Size specifier
- * handle_write_char - prints character handle
  * Return: Number of chars printed
  */
-
 int print_char(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -159,7 +156,6 @@ int print_char(va_list types, char buffer[],
 
 	return (handle_write_char(c, buffer, flags, width, precision, size));
 }
-
 /************************* PRINT A STRING *************************/
 /**
  * print_string - Prints a string
@@ -171,7 +167,6 @@ int print_char(va_list types, char buffer[],
  * @size: Size specifier
  * Return: Number of chars printed
  */
-
 int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -216,7 +211,6 @@ int print_string(va_list types, char buffer[],
 
 	return (write(1, str, length));
 }
-
 /************************* PRINT PERCENT SIGN *************************/
 /**
  * print_percent - Prints a percent sign
@@ -249,10 +243,8 @@ int print_percent(va_list types, char buffer[],
  * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
- * write_number - prints number
  * Return: Number of chars printed
  */
-
 int print_intint(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
